@@ -1,52 +1,47 @@
-html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
+/* Importar fuente elegante similar a la imagen */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
 
 body {
-  margin-bottom: 60px;
+    background-color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    color: #333;
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
+.hero-section {
+    background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('https://www.transparenttextures.com/patterns/cubes.png');
+    border-bottom: 1px solid #eee;
 }
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+/* Efecto Hover para las tarjetas */
+.hover-card {
+    transition: transform 0.3s ease, shadow 0.3s ease;
+    border-radius: 0 !important; /* Estilo minimalista cuadrado */
 }
 
-body {
-    background-color: #f4f6f9;
-}
-table {
-    background-color: white;
-    border-radius: 8px;
-    overflow: hidden;
+    .hover-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+    }
+
+.card-title {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 1.1rem;
 }
 
-.table th {
-    background-color: #343a40;
-    color: white;
-}
-.btn-primary {
-    border-radius: 20px;
+/* Ajustes para la Navbar (Minimalista) */
+.navbar {
+    background-color: #fff !important;
+    border-bottom: 1px solid #eee;
 }
 
-.btn-danger {
-    border-radius: 20px;
+.navbar-brand {
+    color: #333 !important;
+    font-weight: 300;
+    letter-spacing: 2px;
+}
+
+.nav-link {
+    color: #666 !important;
+    font-size: 0.9rem;
 }

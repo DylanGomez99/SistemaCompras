@@ -1,53 +1,85 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
-}
-
-@{
     ViewData["Title"] = "Inicio";
 }
 
-<div class="container mt-5">
-    <h2 class="text-center mb-4">Sistema de Compras</h2>
-    <p class="text-center mb-5">Plataforma para la gestión de artículos, empleados, proveedores, departamentos y más.</p>
-
-    <div class="row g-4 justify-content-center">
-
-        <div class="col-md-3">
-            <a class="btn btn-primary btn-lg w-100 shadow" asp-controller="Departamentos" asp-action="Index">
-                Departamentos
-            </a>
-        </div>
-
-        <div class="col-md-3">
-            <a class="btn btn-primary btn-lg w-100 shadow" asp-controller="Empleados" asp-action="Index">
-                Empleados
-            </a>
-        </div>
-
-        <div class="col-md-3">
-            <a class="btn btn-primary btn-lg w-100 shadow" asp-controller="Proveedores" asp-action="Index">
-                Proveedores
-            </a>
-        </div>
-
-        <div class="col-md-3">
-            <a class="btn btn-primary btn-lg w-100 shadow" asp-controller="Articulos" asp-action="Index">
-                Artículos
-            </a>
-        </div>
-
-        <div class="col-md-3">
-            <a class="btn btn-primary btn-lg w-100 shadow" asp-controller="UnidadMedidas" asp-action="Index">
-                Unidades de Medida
-            </a>
-        </div>
-
-        <div class="col-md-3">
-            <a class="btn btn-primary btn-lg w-100 shadow" asp-controller="Marcas" asp-action="Index">
-                Marcas
-            </a>
-        </div>
-
+<div class="hero-section text-center py-5 mb-5">
+    <div class="container">
+        <h1 class="display-4 fw-light text-uppercase" style="letter-spacing: 5px;">Sistema de Compras</h1>
+        <hr class="mx-auto" style="width: 60px; border-top: 2px solid #333; opacity: 1;">
+        <p class="lead text-muted fw-light">Plataforma institucional para la gestión de activos y personal.</p>
     </div>
 </div>
 
+<div class="container">
+    <div class="text-center mb-5">
+        <h2 class="fw-light text-secondary" style="letter-spacing: 3px;">MENÚ</h2>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm hover-card text-center p-4">
+                <div class="card-body">
+                    <i class="bi bi-building fs-1 mb-3 d-block text-dark"></i>
+                    <h5 class="card-title fw-normal">Departamentos</h5>
+                    <p class="small text-muted">Gestión de áreas y departamentos.</p>
+                    <a class="stretched-link" asp-controller="Departamentos" asp-action="Index"></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm hover-card text-center p-4">
+                <div class="card-body">
+                    <i class="bi bi-people fs-1 mb-3 d-block text-dark"></i>
+                    <h5 class="card-title fw-normal">Empleados</h5>
+                    <p class="small text-muted">Control de personal y nómina.</p>
+                    <a class="stretched-link" asp-controller="Empleados" asp-action="Index"></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm hover-card text-center p-4">
+                <div class="card-body">
+                    <i class="bi bi-truck fs-1 mb-3 d-block text-dark"></i>
+                    <h5 class="card-title fw-normal">Proveedores</h5>
+                    <p class="small text-muted">Registro de socios comerciales.</p>
+                    <a class="stretched-link" asp-controller="Proveedores" asp-action="Index"></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm hover-card text-center p-4">
+                <div class="card-body">
+                    <i class="bi bi-box-seam fs-1 mb-3 d-block text-dark"></i>
+                    <h5 class="card-title fw-normal">Artículos</h5>
+                    <p class="small text-muted">Inventario de suministros.</p>
+                    <a class="stretched-link" asp-controller="Articulos" asp-action="Index"></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm hover-card text-center p-4">
+                <div class="card-body">
+                    <i class="bi bi-rulers fs-1 mb-3 d-block text-dark"></i>
+                    <h5 class="card-title fw-normal">Unidades de Medida</h5>
+                    <p class="small text-muted">Escalas y medidas del sistema.</p>
+                    <a class="stretched-link" asp-controller="UnidadMedidas" asp-action="Index"></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm hover-card text-center p-4">
+                <div class="card-body">
+                    <i class="bi bi-tags fs-1 mb-3 d-block text-dark"></i>
+                    <h5 class="card-title fw-normal">Marcas</h5>
+                    <p class="small text-muted">Catalogación de fabricantes.</p>
+                    <a class="stretched-link" asp-controller="Marcas" asp-action="Index"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
