@@ -17,6 +17,6 @@ namespace SistemaCompras.Data
         public DbSet<UnidadMedida> UnidadesMedida { get; set; }
         public DbSet<Proveedor> Proveedores { get; set; }
         public DbSet<Articulo> Articulos { get; set; }
-
+        public DbSet<Usuario> Usuarios { get; set; }
     }
 }

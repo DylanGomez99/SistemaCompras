@@ -2,6 +2,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using SistemaCompras.Data;
+using SistemaCompras.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddSession();
 
 var app = builder.Build();
 
@@ -22,16 +24,32 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+    if (!context.Usuarios.Any())
+    {
+        context.Usuarios.Add(new Usuario
+        {
+            Username = "admin",
+            Password = "1234"
+        });
+
+        context.SaveChanges();
+    }
+}
+
 app.UseHttpsRedirection();
 app.UseRouting();
-
+app.UseSession();
 app.UseAuthorization();
 
 app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
+    pattern: "{controller=Login}/{action=Index}/{id?}")
     .WithStaticAssets();
 
 
