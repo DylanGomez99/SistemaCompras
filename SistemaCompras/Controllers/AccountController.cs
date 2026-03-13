@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SistemaCompras.Data;
-using SistemaCompras.Models;
-using System.Linq;
+using SistemaCompras.ViewModels;
 
 namespace SistemaCompras.Controllers
 {
@@ -14,45 +17,47 @@ namespace SistemaCompras.Controllers
             _context = context;
         }
 
-        // LOGIN
+        [HttpGet]
         public IActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Login(string username, string password)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(LoginViewModel model)
         {
-            var user = _context.Usuarios
-                .FirstOrDefault(u => u.Username == username && u.Password == password);
+            if (!ModelState.IsValid)
+                return View(model);
 
-            if (user != null)
+            var usuario = await _context.Usuarios
+                .FirstOrDefaultAsync(u => u.UserName == model.UserName && u.Password == model.Password);
+
+            if (usuario == null)
             {
-                return RedirectToAction("Index", "Home");
+                ModelState.AddModelError("", "Usuario o contrase�a incorrectos");
+                return View(model);
             }
 
-            ViewBag.Error = "Usuario o contraseña incorrectos";
-            return View();
-        }
-
-        // REGISTER
-        public IActionResult Register()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult Register(Usuario usuario)
-        {
-            if (ModelState.IsValid)
+            var claims = new List<Claim>
             {
-                _context.Usuarios.Add(usuario);
-                _context.SaveChanges();
+                new Claim(ClaimTypes.Name, usuario.UserName)
+            };
 
-                return RedirectToAction("Login");
-            }
+            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            var principal = new ClaimsPrincipal(identity);
 
-            return View(usuario);
+            await HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                principal);
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Login", "Account");
         }
     }
 }

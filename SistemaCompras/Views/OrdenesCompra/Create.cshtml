@@ -1,0 +1,131 @@
+@model SistemaCompras.ViewModels.OrdenCompraCreateViewModel
+
+@{
+    ViewData["Title"] = "Crear Orden de Compra";
+}
+
+<h1>Crear Orden de Compra</h1>
+
+<form asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="NumeroOrden" class="form-label">Número de la Orden</label>
+        <input asp-for="NumeroOrden" class="form-control" />
+        <span asp-validation-for="NumeroOrden" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="SolicitudCompraId" class="form-label">Identificador Solicitud</label>
+        <select asp-for="SolicitudCompraId" asp-items="Model.Solicitudes" class="form-control">
+            <option value="">-- Sin solicitud --</option>
+        </select>
+        <span asp-validation-for="SolicitudCompraId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ProveedorId" class="form-label">Proveedor</label>
+        <select asp-for="ProveedorId" asp-items="Model.Proveedores" class="form-control">
+            <option value="">-- Seleccione proveedor --</option>
+        </select>
+        <span asp-validation-for="ProveedorId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Estado" class="form-label"></label>
+        <select asp-for="Estado" class="form-control">
+            <option value="Generada">Generada</option>
+            <option value="Enviada">Enviada</option>
+            <option value="Recibida">Recibida</option>
+            <option value="Cancelada">Cancelada</option>
+        </select>
+        <span asp-validation-for="Estado" class="text-danger"></span>
+    </div>
+
+    <h4>Detalle</h4>
+
+    <div id="detalles">
+        @for (int i = 0; i < Model.Detalles.Count; i++)
+        {
+        <div class="row mb-2">
+            <div class="col-md-3">
+                <select asp-for="Detalles[@i].ArticuloId" asp-items="Model.Articulos" class="form-control">
+                    <option value="">-- Artículo --</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <select asp-for="Detalles[@i].UnidadMedidaId" asp-items="Model.UnidadesMedida" class="form-control">
+                    <option value="">-- Unidad --</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <select asp-for="Detalles[@i].MarcaId" asp-items="Model.Marcas" class="form-control">
+                    <option value="">-- Marca --</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <input asp-for="Detalles[@i].Cantidad" class="form-control" placeholder="Cantidad" />
+            </div>
+            <div class="col-md-3">
+                <input asp-for="Detalles[@i].CostoUnitario" class="form-control" placeholder="Costo Unitario" />
+            </div>
+        </div>
+        }
+    </div>
+
+    <button type="button" class="btn btn-secondary mb-3" onclick="agregarDetalle()">Agregar línea</button>
+    <br />
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a asp-action="Index" class="btn btn-outline-secondary">Volver</a>
+</form>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+
+    <script>
+        let index = @Model.Detalles.Count;
+
+        function agregarDetalle() {
+            const container = document.getElementById("detalles");
+            const html = `
+                <div class="row mb-2">
+                    <div class="col-md-3">
+                        <select name="Detalles[${index}].ArticuloId" class="form-control">
+                            <option value="">-- Artículo --</option>
+                            @foreach (var item in Model.Articulos!)
+                            {
+                                <text><option value="@item.Value">@item.Text</option></text>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <select name="Detalles[${index}].UnidadMedidaId" class="form-control">
+                            <option value="">-- Unidad --</option>
+                            @foreach (var item in Model.UnidadesMedida!)
+                            {
+                                <text><option value="@item.Value">@item.Text</option></text>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <select name="Detalles[${index}].MarcaId" class="form-control">
+                            <option value="">-- Marca --</option>
+                            @foreach (var item in Model.Marcas!)
+                            {
+                                <text><option value="@item.Value">@item.Text</option></text>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <input name="Detalles[${index}].Cantidad" class="form-control" placeholder="Cantidad" />
+                    </div>
+                    <div class="col-md-3">
+                        <input name="Detalles[${index}].CostoUnitario" class="form-control" placeholder="Costo Unitario" />
+                    </div>
+                </div>
+            `;
+            container.insertAdjacentHTML("beforeend", html);
+            index++;
+        }
+    </script>
+}

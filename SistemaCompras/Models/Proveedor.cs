@@ -7,16 +7,18 @@ namespace SistemaCompras.Models
         public int Id { get; set; }
 
         [Required]
-        public string Nombre { get; set; }
+        [Display(Name = "Cédula / RNC")]
+        public string CedulaRnc { get; set; } = string.Empty;
 
-        public string Telefono { get; set; }
+        [Required]
+        [Display(Name = "Nombre Comercial")]
+        public string Nombre { get; set; } = string.Empty;
 
-        public string Direccion { get; set; }
+        [Required]
+        public string Estado { get; set; } = "Activo";
 
-        public string Email { get; set; }
+        public string? Telefono { get; set; }
 
-        [Required(ErrorMessage = "El RNC es obligatorio")]
-        [RegularExpression(@"^\d{9}$|^\d{11}$", ErrorMessage = "El RNC debe tener 9 u 11 números")]
-        public string RNC { get; set; }
+        public string? Email { get; set; }
     }
 }

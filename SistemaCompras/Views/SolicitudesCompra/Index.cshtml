@@ -1,0 +1,38 @@
+@model IEnumerable<SistemaCompras.Models.SolicitudCompra>
+
+    @{
+    ViewData["Title"] = "Solicitudes";
+    }
+
+    <h1>Solicitudes de Artículos</h1>
+
+    <p>
+        <a asp-action="Create" class="btn btn-primary">Nueva Solicitud</a>
+    </p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Identificador</th>
+                <th>Empleado Solicitante</th>
+                <th>Fecha Solicitud</th>
+                <th>Estado</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+{
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Empleado?.Nombre</td>
+                <td>@item.FechaSolicitud.ToString("dd/MM/yyyy")</td>
+                <td>@item.Estado</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                </td>
+            </tr>
+}
+        </tbody>
+    </table>

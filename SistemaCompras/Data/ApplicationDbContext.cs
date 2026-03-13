@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SistemaCompras.Models;
-using System.Text.RegularExpressions;
 
 namespace SistemaCompras.Data
 {
@@ -17,6 +16,12 @@ namespace SistemaCompras.Data
         public DbSet<UnidadMedida> UnidadesMedida { get; set; }
         public DbSet<Proveedor> Proveedores { get; set; }
         public DbSet<Articulo> Articulos { get; set; }
+
+        public DbSet<SolicitudCompra> SolicitudesCompra { get; set; }
+        public DbSet<DetalleSolicitudCompra> DetallesSolicitudCompra { get; set; }
+        public DbSet<OrdenCompra> OrdenesCompra { get; set; }
+        public DbSet<DetalleOrdenCompra> DetallesOrdenCompra { get; set; }
+
         public DbSet<Usuario> Usuarios { get; set; }
     }
 }

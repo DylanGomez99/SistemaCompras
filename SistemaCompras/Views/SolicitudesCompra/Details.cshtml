@@ -1,0 +1,33 @@
+@model SistemaCompras.Models.SolicitudCompra
+
+<h1>Detalle Solicitud</h1>
+
+<div>
+    <p><strong>Identificador Solicitud:</strong> @Model.Id</p>
+    <p><strong>Empleado Solicitante:</strong> @Model.Empleado?.Nombre</p>
+    <p><strong>Fecha Solicitud:</strong> @Model.FechaSolicitud.ToString("dd/MM/yyyy")</p>
+    <p><strong>Estado:</strong> @Model.Estado</p>
+</div>
+
+<h4>Artículos</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Artículo</th>
+            <th>Cantidad</th>
+            <th>Unidad de Medida</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Detalles)
+        {
+        <tr>
+            <td>@item.Articulo?.Nombre</td>
+            <td>@item.Cantidad</td>
+            <td>@item.UnidadMedida?.Nombre</td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Index" class="btn btn-secondary">Volver</a></a>

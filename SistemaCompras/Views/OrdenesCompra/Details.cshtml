@@ -1,0 +1,38 @@
+@model SistemaCompras.Models.OrdenCompra
+
+<h1>Detalle Orden de Compra</h1>
+
+<div>
+    <p><strong>Número de la Orden:</strong> @Model.NumeroOrden</p>
+    <p><strong>Identificador Solicitud:</strong> @Model.SolicitudCompraId</p>
+    <p><strong>Fecha Orden:</strong> @Model.FechaOrden.ToString("dd/MM/yyyy")</p>
+    <p><strong>Estado:</strong> @Model.Estado</p>
+    <p><strong>Proveedor:</strong> @Model.Proveedor?.Nombre</p>
+</div>
+
+<h4>Artículos</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Artículo</th>
+            <th>Cantidad</th>
+            <th>Unidad de Medida</th>
+            <th>Marca</th>
+            <th>Costo Unitario</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Detalles)
+        {
+        <tr>
+            <td>@item.Articulo?.Nombre</td>
+            <td>@item.Cantidad</td>
+            <td>@item.UnidadMedida?.Nombre</td>
+            <td>@item.Marca?.Nombre</td>
+            <td>@item.CostoUnitario.ToString("N2")</td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Index" class="btn btn-secondary">Volver</a>
