@@ -25,14 +25,14 @@
         @foreach (var item in Model.Detalles)
         {
         <tr>
-            <td>@item.Articulo?.Nombre</td>
+            <td>@item.Articulo?.Descripcion</td>
             <td>@item.Cantidad</td>
-            <td>@item.UnidadMedida?.Nombre</td>
-            <td>@item.Marca?.Nombre</td>
+            <td>@item.UnidadMedida?.Descripcion</td>
+            <td>@item.Marca?.Descripcion</td>
             <td>@item.CostoUnitario.ToString("N2")</td>
         </tr>
         }
     </tbody>
 </table>
 
-<a asp-action="Index" class="btn btn-secondary">Volver</a>
+<a asp-action="Index" class="btn btn-secondary">Volver</a>/a>

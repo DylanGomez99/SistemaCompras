@@ -19,14 +19,14 @@ namespace SistemaCompras.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(string username, string password)
+        public IActionResult Index(string userName, string password)
         {
             var usuario = _context.Usuarios
-                .FirstOrDefault(u => u.Username == username && u.Password == password);
+                .FirstOrDefault(u => u.UserName == userName && u.Password == password);
 
             if (usuario != null)
             {
-                HttpContext.Session.SetString("usuario", usuario.Username);
+                HttpContext.Session.SetString("usuario", usuario.UserName);
                 return RedirectToAction("Index", "Home");
             }
 

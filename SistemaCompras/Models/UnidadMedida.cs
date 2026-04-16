@@ -7,6 +7,9 @@ namespace SistemaCompras.Models
         public int Id { get; set; }
 
         [Required]
-        public string Nombre { get; set; }
+        public string Descripcion { get; set; } = "";
+
+        [Required]
+        public bool Estado { get; set; }
     }
 }

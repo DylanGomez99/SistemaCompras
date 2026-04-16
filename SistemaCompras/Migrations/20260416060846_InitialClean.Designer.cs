@@ -11,8 +11,8 @@ using SistemaCompras.Data;
 namespace SistemaCompras.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260312234251_InitialNueva")]
-    partial class InitialNueva
+    [Migration("20260416060846_InitialClean")]
+    partial class InitialClean
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,12 +26,18 @@ namespace SistemaCompras.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("MarcaId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Nombre")
+                    b.Property<string>("Descripcion")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<bool>("Estado")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Existencia")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("MarcaId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("UnidadMedidaId")
                         .HasColumnType("INTEGER");
@@ -49,6 +55,9 @@ namespace SistemaCompras.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("Estado")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Nombre")
@@ -132,11 +141,14 @@ namespace SistemaCompras.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Cargo")
+                    b.Property<string>("Cedula")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("DepartamentoId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("Estado")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Nombre")
@@ -156,9 +168,12 @@ namespace SistemaCompras.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Nombre")
+                    b.Property<string>("Descripcion")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<bool>("Estado")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
@@ -255,13 +270,35 @@ namespace SistemaCompras.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Nombre")
+                    b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("Estado")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UnidadesMedida");
+                });
+
+            modelBuilder.Entity("SistemaCompras.Models.Usuario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.ToTable("UnidadesMedida");
+                    b.ToTable("Usuarios");
                 });
 
             modelBuilder.Entity("SistemaCompras.Models.Articulo", b =>

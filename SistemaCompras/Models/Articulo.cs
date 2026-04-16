@@ -7,12 +7,15 @@ namespace SistemaCompras.Models
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "El nombre es obligatorio")]
-        public string Nombre { get; set; }
+        [Required(ErrorMessage = "La descripción es obligatoria")]
+        public string Descripcion { get; set; } = "";
 
-        [Required(ErrorMessage = "Debe ingresar un monto")]
-        [Range(0.01, 1000000, ErrorMessage = "El monto debe ser mayor que 0")]
-        public decimal Monto { get; set; }
+        [Required(ErrorMessage = "Debe ingresar la existencia")]
+        [Range(0, 1000000, ErrorMessage = "La existencia no puede ser negativa")]
+        public int Existencia { get; set; }
+
+        [Required]
+        public bool Estado { get; set; } = true;
 
         public int MarcaId { get; set; }
         public int UnidadMedidaId { get; set; }
